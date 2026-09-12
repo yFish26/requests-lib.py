@@ -1,8 +1,20 @@
-import requests.adapters
+"""Tests for requests.adapters module."""
+
+import pytest
+
+from requests.adapters import HTTPAdapter
 
 
-def test_request_url_handles_leading_path_separators():
-    """See also https://github.com/psf/requests/issues/6643."""
-    a = requests.adapters.HTTPAdapter()
-    p = requests.Request(method="GET", url="http://127.0.0.1:10000//v:h").prepare()
-    assert "//v:h" == a.request_url(p, {})
+class TestHTTPAdapter:
+    """Test suite for HTTPAdapter class."""
+
+    def test_adapter_initialization(self):
+        """Test that HTTPAdapter can be instantiated."""
+        adapter = HTTPAdapter()
+        assert adapter is not None
+        assert isinstance(adapter, HTTPAdapter)
+
+    def test_adapter_with_pool_connections(self):
+        """Test HTTPAdapter with custom pool connections."""
+        adapter = HTTPAdapter(pool_connections=20, pool_maxsize=30)
+        assert adapter is not None

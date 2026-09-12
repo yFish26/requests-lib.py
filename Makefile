@@ -8,7 +8,7 @@ ci:
 	python -m pytest tests --junitxml=report.xml
 
 test-readme:
-	python setup.py check --restructuredtext --strict && ([ $$? -eq 0 ] && echo "README.rst and HISTORY.rst ok") || echo "Invalid markup in README.rst or HISTORY.rst!"
+	python -c "import pypandoc; pypandoc.convert_file('README.md', 'rst')" > /dev/null && echo "README.md is valid" || echo "README.md validation failed"
 
 coverage:
 	python -m pytest --cov-config .coveragerc --verbose --cov-report term --cov-report xml --cov=src/requests tests
