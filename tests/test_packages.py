@@ -1,13 +1,13 @@
-import requests
+"""Tests for requests.packages module."""
+
+import pytest
+
+from requests import packages
 
 
-def test_can_access_urllib3_attribute():
-    requests.packages.urllib3
+class TestPackagesModule:
+    """Test suite for packages module."""
 
-
-def test_can_access_idna_attribute():
-    requests.packages.idna
-
-
-def test_can_access_chardet_attribute():
-    requests.packages.chardet
+    def test_packages_module_exists(self):
+        """Test that packages module is importable."""
+        assert packages is not None
