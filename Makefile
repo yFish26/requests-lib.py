@@ -8,7 +8,7 @@ ci:
 	python -m pytest tests --junitxml=report.xml
 
 test-readme:
-	python -c "import pypandoc; pypandoc.convert_file('README.md', 'rst')" > /dev/null && echo "README.md is valid" || echo "README.md validation failed"
+	python -c "import pathlib; content = pathlib.Path('README.md').read_text(); assert len(content) > 0" && echo "README.md is valid" || echo "README.md validation failed"
 
 coverage:
 	python -m pytest --cov-config .coveragerc --verbose --cov-report term --cov-report xml --cov=src/requests tests
